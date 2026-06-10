@@ -1,0 +1,58 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  release:
+    name: Build, Pack & Publish
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            9.0.x
+
+      - name: Restore
+        run: dotnet restore KosovoPay.sln
+
+      - name: Build (Release)
+        run: dotnet build KosovoPay.sln --configuration Release --no-restore
+
+      - name: Test (gate)
+        run: dotnet test KosovoPay.sln --configuration Release --no-build --verbosity normal
+
+      - name: Extract version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Pack NuGet package
+        run: |
+          dotnet pack src/KosovoPay/KosovoPay.csproj \
+            --configuration Release \
+            --no-build \
+            -p:PackageVersion=${{ steps.version.outputs.VERSION }} \
+            --output ./nupkgs
+
+      - name: Publish to NuGet
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: |
+          dotnet nuget push ./nupkgs/*.nupkg \
+            --api-key "$NUGET_API_KEY" \
+            --source https://api.nuget.org/v3/index.json \
+            --skip-duplicate
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ./nupkgs/*.nupkg
+          generate_release_notes: true

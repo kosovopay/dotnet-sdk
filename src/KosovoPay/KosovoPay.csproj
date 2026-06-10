@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Deterministic>true</Deterministic>
+
+    <!-- Package metadata -->
+    <PackageId>KosovoPay</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>KosovoPay</Authors>
+    <Company>KosovoPay</Company>
+    <Description>Official .NET SDK for the KosovoPay payment API — hosted + direct checkout, refunds, webhooks, cursor pagination.</Description>
+    <PackageTags>kosovopay;payment;sdk;dotnet;fintech</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/KosovoPay/kosovopay-dotnet-sdk</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://github.com/KosovoPay/kosovopay-dotnet-sdk</PackageProjectUrl>
+    <Copyright>Copyright © KosovoPay</Copyright>
+
+    <!-- Documentation -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Flurl.Http" Version="4.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="9.5.0" />
+    <PackageReference Include="Polly" Version="8.6.1" />
+  </ItemGroup>
+
+</Project>

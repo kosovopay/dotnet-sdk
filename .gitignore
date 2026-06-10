@@ -1,0 +1,46 @@
+## .NET / C#
+
+# Build artifacts
+bin/
+obj/
+out/
+
+# Test results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# NuGet
+*.nupkg
+*.snupkg
+nupkgs/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS & Rider
+.vs/
+.idea/
+*.rsuser
+*.DotSettings.user
+
+# dotnet-format cache
+.dotnet-format/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Rider / JetBrains
+*.DotSettings
+
+# Env / secrets
+.env
+.env.*
+secrets.json
+appsettings.Development.json
