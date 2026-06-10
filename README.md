@@ -1,6 +1,8 @@
 # KosovoPay .NET SDK
 
 Official .NET SDK for the [KosovoPay](https://kosovo.sh) payment API.
+
+📖 **API reference:** https://pay.kosovo.sh/docs
 Supports **.NET 8** and **.NET 9**.
 
 ## Installation

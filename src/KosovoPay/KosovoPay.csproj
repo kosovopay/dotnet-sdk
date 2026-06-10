@@ -11,7 +11,7 @@
 
     <!-- Package metadata -->
     <PackageId>KosovoPay</PackageId>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <Authors>KosovoPay</Authors>
     <Company>KosovoPay</Company>
     <Description>Official .NET SDK for the KosovoPay payment API — hosted + direct checkout, refunds, webhooks, cursor pagination.</Description>
