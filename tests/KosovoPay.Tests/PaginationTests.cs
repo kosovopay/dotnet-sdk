@@ -73,7 +73,7 @@ public sealed class PaginationTests
 
         // The second call should include starting_after=pi_2 in the query string
         http.ShouldHaveCalled("*payments*")
-            .WithQueryParamValue("starting_after", "pi_2")
+            .WithQueryParam("starting_after", "pi_2")
             .Times(1);
     }
 }

@@ -46,10 +46,16 @@ internal sealed class KosovoPayHttpClient : IDisposable
     /// <summary>Builds the Polly resilience pipeline for retry on transient failures.</summary>
     private static ResiliencePipeline BuildPipeline(int maxRetries)
     {
+        // maxRetries counts total attempts; Polly's MaxRetryAttempts counts only the retries after
+        // the first attempt. When maxRetries <= 1 there is nothing to retry, so return an empty pipeline.
+        var retryCount = maxRetries - 1;
+        if (retryCount <= 0)
+            return ResiliencePipeline.Empty;
+
         return new ResiliencePipelineBuilder()
             .AddRetry(new RetryStrategyOptions
             {
-                MaxRetryAttempts = Math.Max(0, maxRetries - 1),
+                MaxRetryAttempts = retryCount,
                 BackoffType = DelayBackoffType.Exponential,
                 Delay = TimeSpan.FromMilliseconds(500),
                 UseJitter = true,

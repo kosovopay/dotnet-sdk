@@ -55,7 +55,12 @@ public sealed class KosovoPayClient : IDisposable
     {
         if (options is null) throw new ArgumentNullException(nameof(options));
         _http = new KosovoPayHttpClient(options);
-        InitResources(out Payments, out Refunds, out Banks, out Currencies, out Rates, out WebhookEndpoints);
+        Payments = new PaymentsResource(_http);
+        Refunds = new RefundsResource(_http);
+        Banks = new BanksResource(_http);
+        Currencies = new CurrenciesResource(_http);
+        Rates = new RatesResource(_http);
+        WebhookEndpoints = new WebhookEndpointsResource(_http);
     }
 
     /// <summary>
@@ -69,23 +74,12 @@ public sealed class KosovoPayClient : IDisposable
         if (flurlClient is null) throw new ArgumentNullException(nameof(flurlClient));
         if (options is null) throw new ArgumentNullException(nameof(options));
         _http = new KosovoPayHttpClient(flurlClient, options);
-        InitResources(out Payments, out Refunds, out Banks, out Currencies, out Rates, out WebhookEndpoints);
-    }
-
-    private void InitResources(
-        out PaymentsResource payments,
-        out RefundsResource refunds,
-        out BanksResource banks,
-        out CurrenciesResource currencies,
-        out RatesResource rates,
-        out WebhookEndpointsResource webhookEndpoints)
-    {
-        payments = new PaymentsResource(_http);
-        refunds = new RefundsResource(_http);
-        banks = new BanksResource(_http);
-        currencies = new CurrenciesResource(_http);
-        rates = new RatesResource(_http);
-        webhookEndpoints = new WebhookEndpointsResource(_http);
+        Payments = new PaymentsResource(_http);
+        Refunds = new RefundsResource(_http);
+        Banks = new BanksResource(_http);
+        Currencies = new CurrenciesResource(_http);
+        Rates = new RatesResource(_http);
+        WebhookEndpoints = new WebhookEndpointsResource(_http);
     }
 
     /// <summary>Identifies the API key — its team, mode, and usable banks.</summary>

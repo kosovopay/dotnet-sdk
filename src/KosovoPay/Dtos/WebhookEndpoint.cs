@@ -3,7 +3,10 @@ using KosovoPay.Enums;
 
 namespace KosovoPay.Dtos;
 
-/// <summary>A configured webhook endpoint.</summary>
+/// <summary>
+/// A configured webhook endpoint.
+/// <c>Secret</c> is only present immediately after create or rotate-secret.
+/// </summary>
 public sealed record WebhookEndpoint(
     [property: JsonPropertyName("id")] string Id,
     [property: JsonPropertyName("url")] string Url,
@@ -12,6 +15,5 @@ public sealed record WebhookEndpoint(
     [property: JsonPropertyName("status")] string Status,
     [property: JsonPropertyName("mode")] BankMode Mode,
     [property: JsonPropertyName("created")] long? Created,
-    /// <summary>Only present immediately after create or rotate-secret.</summary>
     [property: JsonPropertyName("secret")] string? Secret
 );

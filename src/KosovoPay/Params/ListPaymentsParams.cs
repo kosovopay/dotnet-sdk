@@ -60,11 +60,11 @@ public sealed class ListPaymentsParams
         _ => s.ToString().ToLowerInvariant(),
     };
 
-    private static string GetBankCodeWireValue(BankCode code) => code switch
+    private static string GetBankCodeWireValue(Enums.BankCode code) => code switch
     {
-        BankCode.Procredit => "procredit",
-        BankCode.Procard => "procard",
-        BankCode.Onefor => "onefor",
+        Enums.BankCode.Procredit => "procredit",
+        Enums.BankCode.Procard => "procard",
+        Enums.BankCode.Onefor => "onefor",
         _ => code.ToString().ToLowerInvariant(),
     };
 }

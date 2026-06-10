@@ -28,7 +28,7 @@ public sealed record Event(
     public Payment AsPayment()
     {
         var obj = Data.Object ?? throw new InvalidOperationException("Event data.object is null.");
-        var json = obj.Value.GetRawText();
+        var json = obj.GetRawText();
         return JsonSerializer.Deserialize(json, KosovoPayJsonContext.Default.Payment)
             ?? throw new InvalidOperationException("Could not deserialise Payment from event data.");
     }
@@ -40,7 +40,7 @@ public sealed record Event(
     public Refund AsRefund()
     {
         var obj = Data.Object ?? throw new InvalidOperationException("Event data.object is null.");
-        var json = obj.Value.GetRawText();
+        var json = obj.GetRawText();
         return JsonSerializer.Deserialize(json, KosovoPayJsonContext.Default.Refund)
             ?? throw new InvalidOperationException("Could not deserialise Refund from event data.");
     }
