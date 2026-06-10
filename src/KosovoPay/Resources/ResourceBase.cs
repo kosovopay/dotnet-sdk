@@ -10,7 +10,7 @@ namespace KosovoPay.Resources;
 /// Base class for resource clients. Provides typed deserialisation helpers on top of
 /// <see cref="KosovoPayHttpClient"/>.
 /// </summary>
-internal abstract class ResourceBase
+public abstract class ResourceBase
 {
     private static readonly JsonSerializerOptions _serializeOptions = new()
     {
@@ -19,7 +19,7 @@ internal abstract class ResourceBase
 
     private protected readonly KosovoPayHttpClient Http;
 
-    protected ResourceBase(KosovoPayHttpClient http) => Http = http;
+    private protected ResourceBase(KosovoPayHttpClient http) => Http = http;
 
     /// <summary>Executes a GET and deserialises the response body.</summary>
     private protected async Task<T> GetAsync<T>(
